@@ -2,6 +2,20 @@ LeetCode
 
 -----------------------------------------------
 medium
+180. Consecutive Numbers
 
+SELECT DISTINCT l1.num AS ConsecutiveNums
+FROM Logs AS l1, Logs AS l2, Logs AS l3
+WHERE l2.id = l1.id+1 AND l3.id = l2.id+1 AND l1.num = l2.num AND l2.num = l3.num;
+-----------------------------------------------
 
+-----------------------------------------------
+medium
+184. Department Highest Salary
+
+SELECT d.Name AS Department, e1.Name AS Employee, e1.Salary
+FROM employee AS e1 LEFT JOIN employee AS e2
+ON e1.departmentId = e2.departmentId AND e1.salary < e2.salary
+JOIN Department AS d ON e1.departmentId = d.Id
+WHERE e2.Salary IS NULL;
 -----------------------------------------------
