@@ -19,3 +19,46 @@ ON e1.departmentId = e2.departmentId AND e1.salary < e2.salary
 JOIN Department AS d ON e1.departmentId = d.Id
 WHERE e2.Salary IS NULL;
 -----------------------------------------------
+
+-----------------------------------------------
+medium
+570. Managers with at Least 5 Direct Reports
+
+SELECT name 
+FROM Employee 
+WHERE id IN (SELECT managerId FROM Employee GROUP BY managerId HAVING COUNT(id) >= 5);
+-----------------------------------------------
+
+-----------------------------------------------
+medium
+1934. Confirmation Rate
+
+SELECT s.user_id, ifnull(round(sum(action = 'confirmed') / count(*), 2), 0.00) AS confirmation_rate
+FROM Signups s LEFT JOIN Confirmations c 
+USING(user_id)
+group by s.user_id;
+-----------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
