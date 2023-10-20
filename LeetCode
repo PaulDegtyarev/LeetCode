@@ -66,6 +66,52 @@ FROM Activity
 WHERE (player_id, DATE_SUB(event_date, INTERVAL 1 DAY)) IN (SELECT player_id, MIN(event_date) as first_login FROM Activity GROUP BY player_id);
 -----------------------------------------------
 
+-----------------------------------------------
+medium
+1070. Product Sales Analysis III
+
+SELECT product_id, year AS first_year, quantity, price
+FROM Sales
+WHERE (product_id, year) IN (SELECT product_id, MIN(year) FROM Sales GROUP BY product_id);
+-----------------------------------------------
+
+-----------------------------------------------
+medium
+1045. Customers Who Bought All Products
+
+SELECT customer_id
+FROM Customer
+GROUP BY customer_id
+HAVING COUNT(distinct product_key) = (SELECT COUNT(DISTINCT product_key) FROM Product);
+-----------------------------------------------
+
+-----------------------------------------------
+medium
+1164. Product Price at a Given Date
+
+SELECT DISTINCT product_id, 10 as price 
+FROM Products 
+WHERE product_id NOT IN(SELECT DISTINCT product_id FROM Products WHERE change_date <='2019-08-16')
+UNION 
+SELECT product_id, new_price AS price
+FROM Products
+WHERE (product_id,change_date) IN (SELECT product_id , MAX(change_date) AS date FROM Products WHERE change_date <='2019-08-16' GROUP BY product_id);
+-----------------------------------------------
+
+-----------------------------------------------
+medium
+1204. Last Person to Fit in the Bus
+
+
+-----------------------------------------------
+
+
+
+
+
+
+
+
 
 
 
