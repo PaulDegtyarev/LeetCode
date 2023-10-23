@@ -102,15 +102,36 @@ WHERE (product_id,change_date) IN (SELECT product_id , MAX(change_date) AS date 
 medium
 1204. Last Person to Fit in the Bus
 
-
+SELECT person_name
+FROM Queue AS last_person
+WHERE (SELECT SUM(weight) FROM Queue WHERE turn <= last_person.turn) <= 1000
+ORDER BY turn DESC
+LIMIT 1;
 -----------------------------------------------
 
+-----------------------------------------------
+medium
+1907. Count Salary Categories
+
+SELECT 'Low Salary' AS category, COUNT(account_id) AS accounts_count 
+FROM Accounts
+WHERE income < 20000
+UNION
+SELECT 'Average Salary' AS category, COUNT(account_id) AS accounts_count 
+FROM Accounts
+WHERE income BETWEEN 20000 AND 50000
+UNION
+SELECT 'High Salary' AS category, COUNT(account_id) AS accounts_count 
+FROM Accounts
+WHERE income > 50000;
+-----------------------------------------------
+
+-----------------------------------------------
+medium
+626. Exchange Seats
 
 
-
-
-
-
+-----------------------------------------------
 
 
 
