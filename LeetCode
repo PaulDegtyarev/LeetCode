@@ -221,6 +221,36 @@ FROM Students s JOIN Subjects sb
 ORDER BY s.student_id ASC, sb.subject_name ASC;
 -----------------------------------------------
 
+-----------------------------------------------
+easy
+11. String concatenation
+
+SELECT contest_id, ROUND(COUNT(contest_id)/(SELECT COUNT(user_id) FROM Users)*100, 2) AS percentage 
+FROM Register
+GROUP BY contest_id
+ORDER BY percentage DESC, contest_id;
+-----------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
