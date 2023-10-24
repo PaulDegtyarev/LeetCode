@@ -203,3 +203,25 @@ FROM Insurance
 WHERE (lat, lon) IN (SELECT lat, lon  FROM Insurance GROUP BY lat, lon HAVING COUNT(*) = 1) AND tiv_2015 IN (SELECT tiv_2015 FROM Insurance GROUP BY tiv_2015 HAVING COUNT(tiv_2015) > 1);
 -----------------------------------------------
 
+-----------------------------------------------
+hard
+185. Department Top Three Salaries
+
+SELECT d.name AS department , e.name AS employee, e.salary AS Salary
+FROM employee e, Department d 
+WHERE e.departmentID = d.id AND (SELECT COUNT(DISTINCT (e2.Salary)) FROM  Employee e2 WHERE e2.Salary > e.Salary AND e.DepartmentId = e2.DepartmentId) < 3;
+-----------------------------------------------
+
+-----------------------------------------------
+Easy
+1280. Students and Examinations
+
+SELECT s.student_id, s.student_name, sb.subject_name, (SELECT COUNT(student_id) FROM Examinations WHERE student_id = s.student_id AND subject_name = sb.subject_name) AS attended_exams 
+FROM Students s JOIN Subjects sb
+ORDER BY s.student_id ASC, sb.subject_name ASC;
+-----------------------------------------------
+
+
+
+
+
