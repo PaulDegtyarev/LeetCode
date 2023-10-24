@@ -158,13 +158,48 @@ ORDER BY AVG(rating) DESC, title
 LIMIT 1) 
 -----------------------------------------------
 
+-----------------------------------------------
+Easy
+1084. Sales Analysis III
 
+SELECT Product.product_id, Product.product_name FROM Product 
+JOIN Sales 
+ON Product.product_id = Sales.product_id 
+GROUP BY Sales.product_id 
+HAVING MIN(Sales.sale_date) >= "2019-01-01" AND MAX(Sales.sale_date) <= "2019-03-31";
+-----------------------------------------------
 
+-----------------------------------------------
+medium
+1321. Restaurant Growth
 
+SELECT c1.visited_on AS visited_on, SUM(c2.amount) AS amount,
+       ROUND(AVG(c2.amount), 2) AS average_amount
+FROM(SELECT visited_on, SUM(amount) AS amount FROM Customer GROUP BY visited_on) c1 JOIN(SELECT visited_on, SUM(amount) AS amount FROM Customer GROUP BY visited_on) c2
+WHERE DATEDIFF(c1.visited_on, c2.visited_on) BETWEEN 0 AND 6
+GROUP BY c1.visited_on
+HAVING COUNT(c2.visited_on) = 7;
+-----------------------------------------------
 
+-----------------------------------------------
+medium
+602. Friend Requests II: Who Has the Most Friends
 
+SELECT id , count(id) AS num
+FROM (SELECT requester_id id FROM requestaccepted 
+UNION ALL
+SELECT accepter_id FROM requestaccepted
+)s
+GROUP BY id
+ORDER BY count(id) DESC LIMIT 1;
+-----------------------------------------------
 
+-----------------------------------------------
+medium
+585. Investments in 2016
 
-
-
+SELECT ROUND(SUM(tiv_2016), 2) AS tiv_2016 
+FROM Insurance 
+WHERE (lat, lon) IN (SELECT lat, lon  FROM Insurance GROUP BY lat, lon HAVING COUNT(*) = 1) AND tiv_2015 IN (SELECT tiv_2015 FROM Insurance GROUP BY tiv_2015 HAVING COUNT(tiv_2015) > 1);
+-----------------------------------------------
 
