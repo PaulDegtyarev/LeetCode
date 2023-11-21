@@ -247,8 +247,47 @@ WHERE Client_Id NOT IN (SELECT Users_Id FROM Users WHERE Banned = 'Yes')
 GROUP BY Request_at;
 -----------------------------------------------
 
+-----------------------------------------------
+Hard
+601. Human Traffic of Stadium
 
+SELECT * 
+FROM Stadium
+WHERE id IN (
+    SELECT (S1.id) 
+    FROM Stadium S1, Stadium S2, Stadium S3
+    WHERE (S1.id - S2.id = 1) AND 
+            ((S1.people >= 100) AND 
+                (s2.people >= 100)) AND     
+                    (S2.id - S3.id = 1) AND 
+                        ((S2.people >= 100) AND 
+                            (s3.people >= 100))
+)
 
+OR id IN (
+    SELECT (S2.id) 
+    FROM Stadium S1, Stadium S2, Stadium S3
+    WHERE (S1.id - S2.id = 1) AND 
+        ((S1.people >= 100) AND 
+            (s2.people >= 100)) AND 
+                (S2.id - S3.id = 1) AND 
+                    ((S2.people >= 100) AND 
+                        (s3.people >= 100))
+)
+
+OR id IN (
+    SELECT (S3.id) 
+    FROM Stadium S1, Stadium S2, Stadium S3
+    WHERE (S1.id - S2.id = 1) AND 
+        ((S1.people >= 100) AND 
+            (s2.people >= 100)) AND 
+                (S2.id - S3.id = 1) AND 
+                    ((S2.people >= 100) AND 
+                        (s3.people >= 100))
+)
+
+ORDER BY id; 
+-----------------------------------------------
 
 
 
